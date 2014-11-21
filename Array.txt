@@ -1,5 +1,4 @@
 package project;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,20 +6,25 @@ import java.io.IOException;
 public class Array{
 	private char[][] array;
 	
-	public Array(int x, int y){ //constructor passed an x and y value
-		array = new char[x][y];
+	public Array(int column, int row){ //constructor passed an x and y value
+		array = new char[column][row];
+		for (int i=0; i < getFirstDimension(); i++) {
+			for (int j=0; j < getSecondDimension(); j++) {
+				array[j][i]=' ';
+			}			
+		}
 	}
 	
-	public void setArraySize(int x, int y){ //set array size
-		array = new char[x][y];
+	public void setArraySize(int column, int row){ //set array size
+		array = new char[column][row];
 	}
 	
-	public void setCharAt(int x, int y, char value){ //sets given value at given position
-		array[x][y] = value;
+	public void setCharAt(int column, int row, char value){ //sets given value at given position
+		array[column][row] = value;
 	}
 	
-	public char getCharAt(int x, int y){ //returns value at a given position
-		return array[x][y];
+	public char getCharAt(int column, int row){ //returns value at a given position
+		return array[column][row];
 	}
 	
 	public void copyArray(char[][] a){ //copies passed array;
@@ -46,8 +50,8 @@ public class Array{
 		char random;
 		for(int i = 0; i < getFirstDimension(); i++){
 			for(int j = 0; j < getSecondDimension(); j++){
-				if(array[i][j] == '\0'){
-					while(1 == 1){
+				if(array[i][j] == ' '){
+					while(true){
 						random = (char) (65 + (int) (Math.random()*90));
 						if(random >= 'A' && random <= 'Z'){
 							array[i][j] = random;
@@ -61,6 +65,7 @@ public class Array{
 	
 	public void printArrayToFile(){ //prints array to text file and formats it.
 		File file = new File("C:/Users/Connor Irwin/workspace/project/src/project/output.txt");
+		//C:\Users\irwinc\workspace\Project\src\output
 		
 		try (FileOutputStream fop = new FileOutputStream(file)) {
 			if (!file.exists()) {
@@ -70,7 +75,7 @@ public class Array{
 				fop.write('\n');
 				for(int j = 0; j < getSecondDimension(); j++){
 					fop.write(' ');
-					char content = array[i][j];	
+					char content = array[j][i];	
 					fop.write(content);	
 				}	
 			}
