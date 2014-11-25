@@ -8,8 +8,8 @@ public class Array{
 	
 	public Array(int column, int row){ //constructor passed an x and y value
 		array = new char[column][row];
-		for (int i=0; i < getFirstDimension(); i++) {
-			for (int j=0; j < getSecondDimension(); j++) {
+		for (int i=0; i < getSecondDimension(); i++) {
+			for (int j=0; j < getFirstDimension(); j++) {
 				array[j][i]=' ';
 			}			
 		}
@@ -48,8 +48,8 @@ public class Array{
 	
 	public void randomFill(){ //fills empty spots in the array with characters A-Z
 		char random;
-		for(int i = 0; i < getFirstDimension(); i++){
-			for(int j = 0; j < getSecondDimension(); j++){
+		for(int i = 0; i < getSecondDimension(); i++){
+			for(int j = 0; j < getFirstDimension(); j++){
 				if(array[i][j] == ' '){
 					while(true){
 						random = (char) (65 + (int) (Math.random()*90));
@@ -71,9 +71,9 @@ public class Array{
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			for(int i = 0; i < getFirstDimension(); i++){
+			for(int i = 0; i < getSecondDimension(); i++){
 				fop.write('\n');
-				for(int j = 0; j < getSecondDimension(); j++){
+				for(int j = 0; j < getFirstDimension(); j++){
 					fop.write(' ');
 					char content = array[j][i];	
 					fop.write(content);	

@@ -25,24 +25,24 @@ public class Word{
 		int min1 = 1;
 		Random rand1 = new Random();
 		int random1 = rand1.nextInt((max1 - min1) + 1) + min1;
-		if(random1 == 4){
+		if(random1 == 2){
 			reverse();
 		}
-		int max2 = 4; 
+		int max2 = 3; 
 		int min2 = 1; 
 		Random rand2 = new Random();
 		int random2 = rand2.nextInt((max2 - min2) + 2) + min2;
-//		random2 = 4; //TEST
+		//random2 = 1; //TEST
 		if(random2 == 1){ //horizontal
 			placeHorizontal(a);
 		}
 		else if(random2 == 2){ //vertical
 			placeVertical(a);
 		}
-		else if(random2 == 3){ //diagonal 1
+		else if(random2 == 3){ //diagonal 1 \
 			placeDiagonal1(a);
 		}
-		else if(random2 == 4){ //diagonal 2
+		else if(random2 == 4){ //diagonal 2 /
 			placeDiagonal2(a);
 		}
 	}
@@ -50,7 +50,7 @@ public class Word{
 	public int startPointRow(Array a){ //starting position for placing a word
 		int max = a.getFirstDimension();
 		Random rand = new Random();
-		int random = Math.abs(rand.nextInt()) % max; //X
+		int random = Math.abs(rand.nextInt()) % max;
 		int startPoint = random;
 //		System.out.println(startPoint + "row");
 		return startPoint;
@@ -59,7 +59,7 @@ public class Word{
 	public int startPointColumn(Array a){
 		int max = a.getFirstDimension();
 		Random rand = new Random();
-		int random = Math.abs(rand.nextInt()) % max; //X
+		int random = Math.abs(rand.nextInt()) % max;
 		int startPoint = random;
 //		System.out.println(startPoint + "column");
 		return startPoint;
@@ -134,6 +134,7 @@ public class Word{
 			int endPos = column + word.length - 1;				
 			if (word.length > a.getFirstDimension()){
 				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
+				//break;
 			}					
 			else if(endPos < a.getFirstDimension()){
 				if(checkHorizontal(column, row, a)){
@@ -180,7 +181,7 @@ public class Word{
 			if (word.length > a.getFirstDimension() || word.length > a.getSecondDimension()){ //NEEDS TO BE FIXED
 				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
 			}					
-			else if(endPosColumn < a.getFirstDimension() && endPosRow < a.getSecondDimension()){	//SHITS BROKEN BRUH	
+			else if(endPosColumn < a.getFirstDimension() && endPosRow < a.getSecondDimension()){
 				if(checkDiagonal1(column, row, a)){
 					break;
 				}
@@ -202,12 +203,11 @@ public class Word{
 			if (word.length > a.getFirstDimension() || word.length > a.getSecondDimension()){ //NEEDS TO BE FIXED
 				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
 			}					
-			else if(endPosColumn < a.getFirstDimension() && endPosRow < a.getSecondDimension() && endPosRow >= 0){	//SHITS BROKEN BRUH	
+			else if(endPosColumn < a.getFirstDimension() && endPosRow < a.getSecondDimension() && endPosRow >= 0){
 				if(checkDiagonal2(column, row, a)){
 					break;
 				}
 			}
-			
 			row = startPointRow(a);
 			column = startPointColumn(a);
 		}

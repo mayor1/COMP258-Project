@@ -4,7 +4,85 @@ public class main {
 
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
+		int option1;
+		int option2;
+		Word word = new Word();
+		System.out.println("Welcome to the CR2 Word Search Generator.");
 		
+		do{
+			System.out.println("Would you like to:");
+			System.out.println("1) generate a word search with default values (15x15 grid)");
+			System.out.println("2) generate a word search with custom values");
+			System.out.print("enter your option (1 or 2): ");
+			option1 = keyboard.nextInt();
+			if(option1 != 1 && option1 != 2){
+				System.out.println("The number you entered does not correspond with the prompt.");
+				System.out.println("Please enter either a 1 or a 2.");
+			}
+		}while(option1 != 1 && option1 != 2);
+		
+		Array array = new Array(15, 15);
+		if(option1 == 1){
+			System.out.println("Grid size has been set to 15x15");
+		}
+		else if(option1 == 2){
+			int column;
+			int row;
+			do{
+				System.out.println("How many columns would you like your word search to have?");
+				column = keyboard.nextInt();
+				if(column < 5){
+					System.out.println("The minimum amount of columns you can have is 5.");
+				}
+				if(column > 100){
+					System.out.println("The maximum amount of columns you can have is 100");
+				}
+				System.out.println("How many rows would you like your word search to have?");
+				row = keyboard.nextInt();
+				if(row < 5){
+					System.out.println("The minimum amount of rows you can have is 5.");
+				}
+				if(row > 100){
+					System.out.println("The maximum amount of rows you can have is 100");
+				}
+			}while(column < 5 && row < 5 || column > 100 && row > 100);
+			array = new Array(column, row);
+		}
+		
+		
+		do{
+			System.out.println("Would you like to:");
+			System.out.println("1) enter words to fill the word search manually");
+			System.out.println("2) enter words from a text file");
+			System.out.print("enter your option (1 or 2): ");
+			option2 = keyboard.nextInt();
+			if(option2 != 1 && option2 != 2){
+				System.out.println("The number you entered does not correspond with the prompt.");
+				System.out.println("Please enter either a 1 or a 2.");
+			}
+		}while(option2 != 1 && option2 != 2);
+		
+		if(option2 ==1){
+			int number;
+			String input;
+			char[] temp;
+			System.out.println("Enter number of words you would like to enter.");
+			number = keyboard.nextInt();
+			for(int i = 0; i < number; i++ ){
+				System.out.println("Enter word");
+				input = keyboard.next();
+				temp = input.toCharArray();
+//				if(temp.length > array.getFirstDimension()){
+//					//fail
+//				}
+				word.setWord(temp);
+				word.fill(array);
+			}
+//			array.printArrayToFile();
+		}
+		else if(option2 == 2){
+			//NEED TO CREAT METHODS TO READ AND ENTER WORDS FROM TEXT FILE
+		}
 		
 		keyboard.close();
 	}
