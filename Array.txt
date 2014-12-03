@@ -1,6 +1,7 @@
 package project;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Array{
@@ -65,9 +66,10 @@ public class Array{
 	
 	public void printArrayToFile(){ //prints array to text file and formats it.
 		File file = new File("C:/Users/Connor Irwin/workspace/project/src/project/output.txt");
+		//File file = new File("Documents");
 		//C:\Users\irwinc\workspace\Project\src\output
 		
-		try (FileOutputStream fop = new FileOutputStream(file)) {
+		try(FileOutputStream fop = new FileOutputStream(file)) {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -81,8 +83,9 @@ public class Array{
 			}
 			fop.flush();
 			fop.close();
-		} catch (IOException e) {
+		} catch(IOException e){
 			e.printStackTrace();
 		}
 	}
+	
 }

@@ -213,6 +213,6 @@ public class Word{
 		}
 		for(int i = 0; i < word.length; i++){ //places word in the array
 			a.setCharAt(column + i, row - i, word[i]);
-		}
+		}	
 	}
 }

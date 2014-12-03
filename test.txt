@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class test {
 
 	public static void main(String[] args) {
-		Array a = new Array(7, 6);
+		Array a = new Array(15, 15);
 		Word w = new Word();
 		int number;
 		String input;
@@ -31,7 +31,7 @@ public class test {
 		//System.out.println("d1 = " + d1 + "   d2 = " + d2);
 		
 		//a.setCharAt(6, 3, 'A');
-		a.randomFill();
+		//a.randomFill();
 		//System.out.println(a.getCharAt(6, 3));
 		
 		//System.out.println(w.startPoint(a)[0][0]);
