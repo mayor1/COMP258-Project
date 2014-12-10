@@ -47,21 +47,19 @@ public class Word{
 		}
 	}
 	
-	public int startPointRow(Array a){ //starting position for placing a word
+	public int startPointRow(Array a){ //starting row for placing a word
 		int max = a.getFirstDimension();
 		Random rand = new Random();
 		int random = Math.abs(rand.nextInt()) % max;
 		int startPoint = random;
-//		System.out.println(startPoint + "row");
 		return startPoint;
 	}
 	
-	public int startPointColumn(Array a){
+	public int startPointColumn(Array a){ //starting column for placing a word
 		int max = a.getFirstDimension();
 		Random rand = new Random();
 		int random = Math.abs(rand.nextInt()) % max;
 		int startPoint = random;
-//		System.out.println(startPoint + "column");
 		return startPoint;
 	}
 	
@@ -80,25 +78,18 @@ public class Word{
 		}
 	}
 	
-	public boolean checkHorizontal(int column, int row, Array a){
-//		System.out.println("check horizontal");
+	public boolean checkHorizontal(int column, int row, Array a){ //checks to see is the passed word can be placed horizontally
 		for(int i = 0; i < word.length; i++){
-			//System.out.println("   ["+(column+i)+", "+row+"]='"+a.getCharAt(column + i, row)+"', word["+i+"]="+word[i]);
-
 			if(a.getCharAt(column + i, row) != ' ' && a.getCharAt(column + i, row) != word[i]){
-//				System.out.println("   failed");
 				return false;
 			}
-			
 		}
-//		System.out.println("   succeed");
 		return true;
 	}
 	
 	
-	public boolean checkVertical(int column, int row, Array a){
+	public boolean checkVertical(int column, int row, Array a){ //checks to see is the passed word can be placed vertically
 		for(int i = 0; i < word.length; i++){
-//			System.out.println("   ["+column+", "+(row + i) +"]='"+a.getCharAt(column, row + i)+"', word["+i+"]="+word[i]);
 			if(a.getCharAt(column, row + i) != ' ' && a.getCharAt(column, row + i) != word[i]){
 				return false;
 			}	
@@ -107,9 +98,8 @@ public class Word{
 	}
 
 	
-	public boolean checkDiagonal1(int column, int row, Array a){
+	public boolean checkDiagonal1(int column, int row, Array a){ //checks to see is the passed word can be placed diagonally
 		for(int i = 0; i < word.length; i++){
-//			System.out.println("   ["+(column + i)+", "+(row + i) +"]='"+a.getCharAt(column + i, row + i)+"', word["+i+"]="+word[i]);
 			if(a.getCharAt(column + i, row + i) != ' ' && a.getCharAt(column + i, row + i) != word[i]){
 				return false;
 			}	
@@ -117,9 +107,8 @@ public class Word{
 		return true;
 	}
 	
-	public boolean checkDiagonal2(int column, int row, Array a){
+	public boolean checkDiagonal2(int column, int row, Array a){ //checks to see is the passed word can be placed diagonally
 		for(int i = 0; i < word.length; i++){
-//			System.out.println("   ["+(column + i)+", "+(row - i) +"]='"+a.getCharAt(column + i, row - i)+"', word["+i+"]="+word[i]);
 			if(a.getCharAt(column + i, row - i) != ' ' && a.getCharAt(column + i, row - i) != word[i]){
 				return false;
 			}	
@@ -127,14 +116,13 @@ public class Word{
 		return true;
 	}
 
-	public void placeHorizontal(Array a){
+	public void placeHorizontal(Array a){ //places passed word horizontally
 		int row = startPointRow(a);
 		int column = startPointColumn(a);
 		while(true){
 			int endPos = column + word.length - 1;				
 			if (word.length > a.getFirstDimension()){
-				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
-				//break;
+				System.out.println("Error: passed word is too big");
 			}					
 			else if(endPos < a.getFirstDimension()){
 				if(checkHorizontal(column, row, a)){
@@ -150,13 +138,16 @@ public class Word{
 		}
 	}
 
-	public void placeVertical(Array a){
+	public void placeVertical(Array a){ //places passed word vertically
 		int row = startPointRow(a);
 		int column = startPointColumn(a);
+		int valid = 0;
 		while(true){
 			int endPos = row + word.length - 1;				
 			if (word.length > a.getSecondDimension()){
-				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
+				System.out.println("Error: passed word is too big");
+				valid = -1;
+				break;
 			}					
 			else if(endPos < a.getSecondDimension()){
 				if(checkVertical(column, row, a)){
@@ -167,19 +158,24 @@ public class Word{
 			row = startPointRow(a);
 			column = startPointColumn(a);
 		}
-		for(int i = 0; i < word.length; i++){ //places word in the array
-			a.setCharAt(column, row + i, word[i]);
+		if(valid > -1){
+			for(int i = 0; i < word.length; i++){ //places word in the array
+				a.setCharAt(column, row + i, word[i]);
+			}
 		}
 	}
 	
-	public void placeDiagonal1(Array a){
+	public void placeDiagonal1(Array a){ //places pased word at a diagonal
 		int row = startPointRow(a);
 		int column = startPointColumn(a);
+		int valid = 0;
 		while(true){
 			int endPosRow = row + word.length - 1;
 			int endPosColumn = column + word.length - 1;
-			if (word.length > a.getFirstDimension() || word.length > a.getSecondDimension()){ //NEEDS TO BE FIXED
-				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
+			if (word.length > a.getFirstDimension() || word.length > a.getSecondDimension()){ 
+				System.out.println("Error: passed word is too big");
+				valid = -1;
+				break;
 			}					
 			else if(endPosColumn < a.getFirstDimension() && endPosRow < a.getSecondDimension()){
 				if(checkDiagonal1(column, row, a)){
@@ -190,18 +186,23 @@ public class Word{
 			row = startPointRow(a);
 			column = startPointColumn(a);
 		}
-		for(int i = 0; i < word.length; i++){ //places word in the array
-			a.setCharAt(column + i, row + i, word[i]);
+		if(valid > -1){
+			for(int i = 0; i < word.length; i++){ //places word in the array
+				a.setCharAt(column + i, row + i, word[i]);
+			}
 		}
 	}
-	public void placeDiagonal2(Array a){
+	public void placeDiagonal2(Array a){ // places passed word at a diagonal
 		int row = startPointRow(a);
 		int column = startPointColumn(a);
+		int valid = 0;
 		while(true){
 			int endPosRow = row - word.length - 1;
 			int endPosColumn = column + word.length - 1;
-			if (word.length > a.getFirstDimension() || word.length > a.getSecondDimension()){ //NEEDS TO BE FIXED
-				//THIS WILL TEST IF WORD IS BIGGER THAN THE FIRST DIMENSION OF THE ARRAY
+			if (word.length > a.getFirstDimension() || word.length > a.getSecondDimension()){ 
+				System.out.println("Error: passed word is too big");
+				valid = -1;
+				break;
 			}					
 			else if(endPosColumn < a.getFirstDimension() && endPosRow < a.getSecondDimension() && endPosRow >= 0){
 				if(checkDiagonal2(column, row, a)){
@@ -211,8 +212,10 @@ public class Word{
 			row = startPointRow(a);
 			column = startPointColumn(a);
 		}
-		for(int i = 0; i < word.length; i++){ //places word in the array
-			a.setCharAt(column + i, row - i, word[i]);
-		}	
+		if(valid > -1){
+			for(int i = 0; i < word.length; i++){ //places word in the array
+				a.setCharAt(column + i, row - i, word[i]);
+			}	
+		}
 	}
 }

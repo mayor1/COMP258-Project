@@ -2,9 +2,12 @@ package project;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-public class main {
-
-	public static void main(String[] args) {
+public class Main {
+	public static void main(String[] args){
+		Main m = new Main();
+		m.run();
+	}
+	public void run() {
 		Scanner keyboard = new Scanner(System.in);
 		int option1;
 		int option2;
@@ -26,10 +29,10 @@ public class main {
 		
 		Array array = new Array(15, 15);
 		if(option1 == 1){
-			System.out.println("Grid size has been set to 15x15.");
+			System.out.println("Grid size has been set to 15x15."); //sets grid size to 15x15
 		}
 		else if(option1 == 2){
-			array = option1(array, keyboard);
+			array = option1(array, keyboard); //sets grid size to user input
 		}
 				
 		do{
@@ -45,15 +48,15 @@ public class main {
 		}while(option2 != 1 && option2 != 2);
 		
 		if(option2 == 1){
-			option2_1(array, word, wordbank, keyboard);
+			option2Choice1(array, word, wordbank, keyboard); //inserts words into the grid from user input
 		}
 		else if(option2 == 2){
-			option2_2(array, word, wordbank);
+			option2Choice2(array, word, wordbank); //inserts words into the grid from a predefined text file
 		}
 		
 		keyboard.close();
 	}
-	public static Array option1(Array array, Scanner keyboard){
+	private Array option1(Array array, Scanner keyboard){ //sets grid size to user input
 		int size;
 		do{
 
@@ -72,18 +75,13 @@ public class main {
 		array = new Array(size, size);
 		return array;
 	}
-	public static void option2_1(Array array, Word word, String wordbank, Scanner keyboard){
+	private void option2Choice1(Array array, Word word, String wordbank, Scanner keyboard){ //inserts words into the grid from user input
 		int number = -1;
 		String input;
 		char[] temp;
 		do{
 			System.out.print("Enter number of words you would like to enter: ");
-//			try{
 				number = keyboard .nextInt();
-//			}catch(InputMismatchException e){
-//				System.out.println("ERROR: user input was not a number");
-//				System.out.println("Please enter number.");
-//			}
 			if(number > array.getFirstDimension()){
 				System.out.println("Too many words for this size grid.");
 				System.out.println("The maximum amount of words for this size is " + array.getFirstDimension());
@@ -114,16 +112,14 @@ public class main {
 		    out.print("\n\nWordbank: ");
 			out.print(wordbank);
 		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
 		}
 		System.out.println("\nYour word search has been printed to output.txt.");
 	}
-	public static void option2_2(Array array, Word word, String wordbank){
+	private void option2Choice2(Array array, Word word, String wordbank){ //inserts words into the grid from a predefined text file
 		try{
 			File file = new File("C:/Users/Connor Irwin/workspace/project/src/project/input.txt");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
-			//StringBuffer stringBuffer = new StringBuffer();
 			String line;
 			int i = 0;
 			while((line = bufferedReader.readLine()) != null){
@@ -154,7 +150,6 @@ public class main {
 		    out.print("\n\nWordbank: ");
 			out.print(wordbank);
 		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
 		}
 		System.out.println("\nYour word search has been printed to output.txt.");
 	}
